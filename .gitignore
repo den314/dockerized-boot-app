@@ -6,5 +6,6 @@
 # Log file
 *.log
 
+*.iml
 .idea
 target/
