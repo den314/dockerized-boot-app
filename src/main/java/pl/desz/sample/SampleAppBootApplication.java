@@ -11,6 +11,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
+import pl.desz.sample.keycloak.KeycloakService;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,14 +25,22 @@ public class SampleAppBootApplication {
     }
 
     @Autowired
+    KeycloakService keycloakService;
+
+    @Autowired
     private TaskRepository tr;
 
     @Bean
     public CommandLineRunner runner() {
         return args -> {
+
+            // new tasks
             tr.save(new Task("do some coding"));
             tr.save(new Task("go running"));
             tr.save(new Task("buy flowers for your wife"));
+
+            // keycloak api usage
+            keycloakService.doWhatever();
         };
     }
 }
